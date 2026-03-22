@@ -1,5 +1,5 @@
 // Replace BASE_URL with your actual GitHub Pages / raw GitHub URL
-const BASE_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/themes";
+const BASE_URL = "hhttps://idk92972772.github.io/discorrd/#";
 
 const themes = [
   {
