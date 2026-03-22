@@ -1,306 +1,204 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+const themes = [
+  {
+    id: 1,
+    name: "Midnight",
+    author: "refact0r",
+    desc: "A clean, dark theme with a deep blue-black palette and subtle accents.",
+    tags: ["dark", "minimal"],
+    color: "#1a1b2e",
+    emoji: "🌙",
+    url: "https://raw.githubusercontent.com/refact0r/midnight-discord/main/midnight.theme.css"
+  },
+  {
+    id: 2,
+    name: "Catppuccin Mocha",
+    author: "catppuccin",
+    desc: "Soothing pastel theme for Discord. Warm, cozy, and easy on the eyes.",
+    tags: ["dark", "pastel"],
+    color: "#1e1e2e",
+    emoji: "🐱",
+    url: "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css"
+  },
+  {
+    id: 3,
+    name: "Dracula",
+    author: "dracula",
+    desc: "The classic Dracula color scheme ported to Discord.",
+    tags: ["dark", "purple"],
+    color: "#282a36",
+    emoji: "🧛",
+    url: "https://dracula.github.io/discord/Dracula.theme.css"
+  },
+  {
+    id: 4,
+    name: "Tokyo Night",
+    author: "enkia",
+    desc: "A dark theme inspired by the Tokyo Night VS Code theme.",
+    tags: ["dark", "blue"],
+    color: "#1a1b26",
+    emoji: "🗼",
+    url: "#"
+  },
+  {
+    id: 5,
+    name: "Rosé Pine",
+    author: "rose-pine",
+    desc: "All natural pine, faux fur and a bit of soho vibes for the classy minimalist.",
+    tags: ["dark", "pink"],
+    color: "#191724",
+    emoji: "🌹",
+    url: "#"
+  },
+  {
+    id: 6,
+    name: "Nord",
+    author: "arctic-ice-studio",
+    desc: "An arctic, north-bluish color palette for Discord.",
+    tags: ["dark", "blue", "minimal"],
+    color: "#2e3440",
+    emoji: "❄️",
+    url: "#"
+  },
+  {
+    id: 7,
+    name: "Gruvbox",
+    author: "morhetz",
+    desc: "Retro groove color scheme with warm earthy tones.",
+    tags: ["dark", "warm"],
+    color: "#282828",
+    emoji: "🟫",
+    url: "#"
+  },
+  {
+    id: 8,
+    name: "One Dark",
+    author: "atom",
+    desc: "Atom's iconic One Dark theme, now for Discord.",
+    tags: ["dark", "minimal"],
+    color: "#21252b",
+    emoji: "⚛️",
+    url: "#"
+  }
+];
 
-:root {
-  --bg: #313338;
-  --sidebar-bg: #2b2d31;
-  --surface: #1e1f22;
-  --card-bg: #2b2d31;
-  --card-hover: #313338;
-  --border: #1e1f22;
-  --accent: #5865f2;
-  --accent-hover: #4752c4;
-  --green: #23a55a;
-  --green-hover: #1a8a47;
-  --text: #dbdee1;
-  --muted: #949ba4;
-  --section: #8e9297;
-  --radius: 8px;
+let installed = JSON.parse(localStorage.getItem("installedThemes") || "[]");
+
+function saveInstalled() {
+  localStorage.setItem("installedThemes", JSON.stringify(installed));
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'gg sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
+function showToast(msg, isError = false) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "toast" + (isError ? " error" : "");
+  setTimeout(() => t.classList.add("hidden"), 2500);
 }
 
-/* LAYOUT */
-.settings-layout {
-  display: flex;
-  height: 100vh;
+function isInstalled(id) {
+  return installed.includes(id);
 }
 
-/* SIDEBAR */
-.sidebar {
-  width: 232px;
-  min-width: 232px;
-  background: var(--sidebar-bg);
-  padding: 60px 6px 16px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+function installTheme(id) {
+  if (!installed.includes(id)) {
+    installed.push(id);
+    saveInstalled();
+    renderAll();
+    showToast("Theme installed!");
+  }
 }
 
-.sidebar-section {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--section);
-  letter-spacing: 0.06em;
-  padding: 16px 10px 4px;
-  text-transform: uppercase;
+function removeTheme(id) {
+  installed = installed.filter(i => i !== id);
+  saveInstalled();
+  renderAll();
+  showToast("Theme removed.");
 }
 
-.sidebar-item {
-  display: block;
-  padding: 6px 10px;
-  border-radius: 4px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.1s, color 0.1s;
+function createCard(theme, showRemove = false) {
+  const card = document.createElement("div");
+  card.className = "theme-card";
+  card.dataset.name = theme.name.toLowerCase();
+  card.dataset.tags = theme.tags.join(" ");
+
+  const preview = document.createElement("div");
+  preview.className = "theme-preview-placeholder";
+  preview.style.background = theme.color;
+  preview.textContent = theme.emoji;
+
+  const body = document.createElement("div");
+  body.className = "theme-body";
+  body.innerHTML = `
+    <div class="theme-name">${theme.name}</div>
+    <div class="theme-author">by ${theme.author}</div>
+    <div class="theme-desc">${theme.desc}</div>
+    <div class="theme-tags">${theme.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+  `;
+
+  const footer = document.createElement("div");
+  footer.className = "theme-footer";
+
+  if (showRemove) {
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "btn-remove";
+    removeBtn.textContent = "Remove";
+    removeBtn.onclick = () => removeTheme(theme.id);
+    footer.appendChild(removeBtn);
+  } else {
+    const installBtn = document.createElement("button");
+    if (isInstalled(theme.id)) {
+      installBtn.className = "btn-install installed";
+      installBtn.textContent = "Installed";
+    } else {
+      installBtn.className = "btn-install";
+      installBtn.textContent = "Install";
+      installBtn.onclick = () => installTheme(theme.id);
+    }
+    footer.appendChild(installBtn);
+  }
+
+  card.appendChild(preview);
+  card.appendChild(body);
+  card.appendChild(footer);
+  return card;
 }
 
-.sidebar-item:hover { background: rgba(255,255,255,0.06); color: var(--text); }
-.sidebar-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 500; }
+function renderAll(query = "") {
+  const onlineGrid = document.getElementById("online");
+  const installedGrid = document.getElementById("installed");
+  onlineGrid.innerHTML = "";
+  installedGrid.innerHTML = "";
 
-.sidebar-divider {
-  height: 1px;
-  background: rgba(255,255,255,0.06);
-  margin: 8px 10px;
+  const q = query.toLowerCase();
+
+  const filtered = themes.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    t.author.toLowerCase().includes(q) ||
+    t.tags.some(tag => tag.includes(q))
+  );
+
+  if (filtered.length === 0) {
+    onlineGrid.innerHTML = `<div class="empty-state">No themes found for "${query}"</div>`;
+  } else {
+    filtered.forEach(t => onlineGrid.appendChild(createCard(t, false)));
+  }
+
+  const installedThemes = themes.filter(t => isInstalled(t.id));
+  if (installedThemes.length === 0) {
+    installedGrid.innerHTML = `<div class="empty-state">No themes installed yet.</div>`;
+  } else {
+    installedThemes.forEach(t => installedGrid.appendChild(createCard(t, true)));
+  }
 }
 
-/* CONTENT */
-.content {
-  flex: 1;
-  padding: 60px 40px 40px;
-  overflow-y: auto;
-  background: var(--bg);
+function switchTab(id, btn) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".themes-grid").forEach(g => g.classList.add("hidden"));
+  btn.classList.add("active");
+  document.getElementById(id).classList.remove("hidden");
 }
 
-.content-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  gap: 1rem;
-  flex-wrap: wrap;
+function filterThemes(val) {
+  renderAll(val);
 }
 
-.content h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 0.875rem;
-  margin-top: 4px;
-}
-
-.search {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px;
-  color: var(--text);
-  padding: 8px 12px;
-  font-size: 0.875rem;
-  width: 220px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.search:focus { border-color: var(--accent); }
-.search::placeholder { color: var(--muted); }
-
-/* TABS */
-.tab-row {
-  display: flex;
-  gap: 0;
-  border-bottom: 2px solid rgba(255,255,255,0.06);
-  margin-bottom: 24px;
-}
-
-.tab {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 0.95rem;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  transition: color 0.15s, border-color 0.15s;
-  font-family: inherit;
-}
-.tab:hover { color: var(--text); }
-.tab.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
-
-/* GRID */
-.themes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.themes-grid.hidden { display: none; }
-
-/* CARD */
-.theme-card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.04);
-  transition: border-color 0.2s, transform 0.15s;
-  display: flex;
-  flex-direction: column;
-}
-
-.theme-card:hover {
-  border-color: rgba(255,255,255,0.12);
-  transform: translateY(-2px);
-}
-
-.theme-preview {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  display: block;
-  background: var(--surface);
-}
-
-.theme-preview-placeholder {
-  width: 100%;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-}
-
-.theme-body {
-  padding: 14px 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.theme-name {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.theme-author {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
-.theme-desc {
-  font-size: 0.83rem;
-  color: var(--muted);
-  line-height: 1.5;
-  flex: 1;
-}
-
-.theme-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-
-.tag {
-  background: rgba(88,101,242,0.2);
-  color: #8b9cf4;
-  font-size: 0.72rem;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-weight: 500;
-}
-
-.theme-footer {
-  padding: 10px 16px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.btn-install {
-  background: var(--green);
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 7px 16px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background 0.15s;
-}
-.btn-install:hover { background: var(--green-hover); }
-
-.btn-install.installed {
-  background: var(--surface);
-  color: var(--muted);
-  cursor: default;
-}
-
-.btn-remove {
-  background: transparent;
-  color: #ed4245;
-  border: 1px solid #ed4245;
-  border-radius: 4px;
-  padding: 7px 14px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background 0.15s;
-}
-.btn-remove:hover { background: rgba(237,66,69,0.12); }
-
-.btn-preview {
-  background: transparent;
-  color: var(--muted);
-  border: none;
-  font-size: 0.82rem;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 4px 0;
-  text-decoration: underline;
-  transition: color 0.15s;
-}
-.btn-preview:hover { color: var(--text); }
-
-/* EMPTY STATE */
-.empty-state {
-  grid-column: 1/-1;
-  text-align: center;
-  color: var(--muted);
-  padding: 60px 0;
-  font-size: 0.95rem;
-}
-
-/* TOAST */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #23a55a;
-  color: #fff;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  z-index: 999;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  transition: opacity 0.3s;
-}
-.toast.hidden { opacity: 0; pointer-events: none; }
-.toast.error { background: #ed4245; }
+renderAll();
