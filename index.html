@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Download</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <span class="logo">MyApp</span>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" class="active">Download</a>
+      <a href="#">Docs</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Download <span class="accent">MyApp</span></h1>
+    <p class="subtitle">Pick your platform and get started in seconds.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('windows', this)">Windows</button>
+      <button class="tab" onclick="showTab('linux', this)">Linux</button>
+      <button class="tab" onclick="showTab('mac', this)">Mac</button>
+      <button class="tab" onclick="showTab('browser', this)">Browser</button>
+    </div>
+
+    <div class="tab-content" id="windows">
+      <div class="card">
+        <div class="card-icon">🪟</div>
+        <h2>Windows Installer</h2>
+        <p>Download and run the installer. It will detect your installs automatically — just pick one and hit Install.</p>
+        <a href="#" class="btn">Download Installer.exe</a>
+        <p class="note">Don't run as Administrator. If you see a security warning, click "More info" → "Run anyway". The app is unsigned to avoid a 300€/year signing fee.</p>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="linux">
+      <div class="card">
+        <div class="card-icon">🐧</div>
+        <h2>Linux Installer</h2>
+        <p>Download the Linux binary and run it from your terminal.</p>
+        <a href="#" class="btn">Download Installer (Linux)</a>
+        <div class="code-block">chmod +x Installer && ./Installer</div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="mac">
+      <div class="card">
+        <div class="card-icon">🍎</div>
+        <h2>Mac Installer</h2>
+        <p>Download the Mac binary. If macOS blocks it, go to System Settings → Privacy & Security and allow it.</p>
+        <a href="#" class="btn">Download Installer (Mac)</a>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="browser">
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h2>Browser Extension</h2>
+        <p>Install directly in your browser. Works on Chrome, Firefox, and most Chromium-based browsers.</p>
+        <div class="browser-btns">
+          <a href="#" class="btn">Chrome / Edge</a>
+          <a href="#" class="btn secondary">Firefox</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Not affiliated with or endorsed by Discord Inc. Discord is a trademark of Discord Inc.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
