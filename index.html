@@ -1,77 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Download</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Themes</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <nav>
-    <span class="logo">MyApp</span>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#" class="active">Download</a>
-      <a href="#">Docs</a>
-    </div>
-  </nav>
 
-  <main>
-    <h1>Download <span class="accent">MyApp</span></h1>
-    <p class="subtitle">Pick your platform and get started in seconds.</p>
+  <!-- Discord-like sidebar -->
+  <div class="settings-layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">USER SETTINGS</div>
+      <a class="sidebar-item">My Account</a>
+      <a class="sidebar-item">Profiles</a>
+      <a class="sidebar-item">Privacy & Safety</a>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">APP SETTINGS</div>
+      <a class="sidebar-item">Appearance</a>
+      <a class="sidebar-item">Accessibility</a>
+      <a class="sidebar-item">Voice & Video</a>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">VENCORD</div>
+      <a class="sidebar-item">Vencord</a>
+      <a class="sidebar-item">Plugins</a>
+      <a class="sidebar-item active">Themes</a>
+      <a class="sidebar-item">Updater</a>
+    </aside>
 
-    <div class="tabs">
-      <button class="tab active" onclick="showTab('windows', this)">Windows</button>
-      <button class="tab" onclick="showTab('linux', this)">Linux</button>
-      <button class="tab" onclick="showTab('mac', this)">Mac</button>
-      <button class="tab" onclick="showTab('browser', this)">Browser</button>
-    </div>
-
-    <div class="tab-content" id="windows">
-      <div class="card">
-        <div class="card-icon">🪟</div>
-        <h2>Windows Installer</h2>
-        <p>Download and run the installer. It will detect your installs automatically — just pick one and hit Install.</p>
-        <a href="#" class="btn">Download Installer.exe</a>
-        <p class="note">Don't run as Administrator. If you see a security warning, click "More info" → "Run anyway". The app is unsigned to avoid a 300€/year signing fee.</p>
-      </div>
-    </div>
-
-    <div class="tab-content hidden" id="linux">
-      <div class="card">
-        <div class="card-icon">🐧</div>
-        <h2>Linux Installer</h2>
-        <p>Download the Linux binary and run it from your terminal.</p>
-        <a href="#" class="btn">Download Installer (Linux)</a>
-        <div class="code-block">chmod +x Installer && ./Installer</div>
-      </div>
-    </div>
-
-    <div class="tab-content hidden" id="mac">
-      <div class="card">
-        <div class="card-icon">🍎</div>
-        <h2>Mac Installer</h2>
-        <p>Download the Mac binary. If macOS blocks it, go to System Settings → Privacy & Security and allow it.</p>
-        <a href="#" class="btn">Download Installer (Mac)</a>
-      </div>
-    </div>
-
-    <div class="tab-content hidden" id="browser">
-      <div class="card">
-        <div class="card-icon">🌐</div>
-        <h2>Browser Extension</h2>
-        <p>Install directly in your browser. Works on Chrome, Firefox, and most Chromium-based browsers.</p>
-        <div class="browser-btns">
-          <a href="#" class="btn">Chrome / Edge</a>
-          <a href="#" class="btn secondary">Firefox</a>
+    <!-- Main content -->
+    <main class="content">
+      <div class="content-header">
+        <div>
+          <h1>Themes</h1>
+          <p class="subtitle">Discover and install themes for your Discord client.</p>
+        </div>
+        <div class="header-actions">
+          <input class="search" type="text" placeholder="Search themes..." oninput="filterThemes(this.value)"/>
         </div>
       </div>
-    </div>
-  </main>
 
-  <footer>
-    <p>Not affiliated with or endorsed by Discord Inc. Discord is a trademark of Discord Inc.</p>
-  </footer>
+      <div class="tab-row">
+        <button class="tab active" onclick="switchTab('online', this)">Online</button>
+        <button class="tab" onclick="switchTab('installed', this)">Installed</button>
+      </div>
+
+      <!-- Online themes grid -->
+      <div id="online" class="themes-grid"></div>
+
+      <!-- Installed themes -->
+      <div id="installed" class="themes-grid hidden"></div>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast hidden" id="toast"></div>
 
   <script src="script.js"></script>
 </body>
