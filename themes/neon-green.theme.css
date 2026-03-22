@@ -1,0 +1,54 @@
+/**
+ * @name Neon Green
+ * @author you
+ * @description Pure black with electric green neon accents. Hacker vibes.
+ * @version 1.0.0
+ */
+
+:root {
+  --background-primary: #050505;
+  --background-secondary: #0a0a0a;
+  --background-secondary-alt: #080808;
+  --background-tertiary: #030303;
+  --background-accent: #00ff41;
+  --background-floating: #0a0a0a;
+  --channeltextarea-background: #0a0a0a;
+  --text-normal: #ccffcc;
+  --text-muted: #4d994d;
+  --text-link: #00ff41;
+  --interactive-normal: #66cc66;
+  --interactive-hover: #ccffcc;
+  --interactive-active: #ffffff;
+  --interactive-muted: #1a4d1a;
+  --header-primary: #00ff41;
+  --header-secondary: #66cc66;
+  --brand-experiment: #00cc33;
+  --brand-experiment-560: #00ff41;
+  --scrollbar-thin-thumb: #00cc33;
+  --scrollbar-auto-thumb: #00cc33;
+  --focus-primary: #00ff41;
+}
+
+.sidebar-1tnWFu { background: #030303; }
+.message-2qnXI6:hover { background: rgba(0,255,65,0.05); }
+.button-38aScr { background: #00cc33 !important; color: #000 !important; }
+.button-38aScr:hover { background: #00ff41 !important; }
+.selected-aXhQR6 { background: rgba(0,255,65,0.12) !important; }
+.selected-aXhQR6 .name-uJV0GL { color: #00ff41 !important; }
+.numberBadge-37OJ3S { background: #00cc33; color: #000; }
+
+/* Scanline overlay for extra hacker feel */
+.app-3xd6d0::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,255,65,0.015) 2px,
+    rgba(0,255,65,0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}

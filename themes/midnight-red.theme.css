@@ -1,0 +1,49 @@
+/**
+ * @name Midnight Red
+ * @author you
+ * @description Deep black base with crimson red accents.
+ * @version 1.0.0
+ */
+
+:root {
+  --background-primary: #0a0a0a;
+  --background-secondary: #111111;
+  --background-secondary-alt: #0d0d0d;
+  --background-tertiary: #080808;
+  --background-accent: #c0392b;
+  --background-floating: #111111;
+  --background-mobile-primary: #0a0a0a;
+  --background-mobile-secondary: #111111;
+  --channeltextarea-background: #111111;
+  --text-normal: #e8e8e8;
+  --text-muted: #888888;
+  --text-link: #e74c3c;
+  --interactive-normal: #aaaaaa;
+  --interactive-hover: #e8e8e8;
+  --interactive-active: #ffffff;
+  --interactive-muted: #555555;
+  --header-primary: #ffffff;
+  --header-secondary: #aaaaaa;
+  --brand-experiment: #c0392b;
+  --brand-experiment-560: #e74c3c;
+  --scrollbar-thin-thumb: #c0392b;
+  --scrollbar-auto-thumb: #c0392b;
+  --focus-primary: #e74c3c;
+}
+
+/* Sidebar */
+.sidebar-1tnWFu { background: #0d0d0d; }
+
+/* Message hover */
+.message-2qnXI6:hover { background: rgba(192,57,43,0.06); }
+
+/* Buttons */
+.button-38aScr { background: #c0392b !important; }
+.button-38aScr:hover { background: #e74c3c !important; }
+
+/* Active channel */
+.selected-aXhQR6 { background: rgba(192,57,43,0.2) !important; }
+.selected-aXhQR6 .name-uJV0GL { color: #e74c3c !important; }
+
+/* Mention badge */
+.numberBadge-37OJ3S { background: #c0392b; }

@@ -1,0 +1,38 @@
+/**
+ * @name Sakura
+ * @author you
+ * @description Soft pink cherry blossom theme. Light and dreamy.
+ * @version 1.0.0
+ */
+
+:root {
+  --background-primary: #1a0d12;
+  --background-secondary: #220f17;
+  --background-secondary-alt: #1c0d13;
+  --background-tertiary: #160a0f;
+  --background-accent: #e91e8c;
+  --background-floating: #220f17;
+  --channeltextarea-background: #220f17;
+  --text-normal: #f5d0e0;
+  --text-muted: #a06080;
+  --text-link: #ff6eb4;
+  --interactive-normal: #cc88aa;
+  --interactive-hover: #f5d0e0;
+  --interactive-active: #ffffff;
+  --interactive-muted: #5c2a3a;
+  --header-primary: #fce4ec;
+  --header-secondary: #cc88aa;
+  --brand-experiment: #e91e8c;
+  --brand-experiment-560: #ff6eb4;
+  --scrollbar-thin-thumb: #e91e8c;
+  --scrollbar-auto-thumb: #e91e8c;
+  --focus-primary: #ff6eb4;
+}
+
+.sidebar-1tnWFu { background: #160a0f; }
+.message-2qnXI6:hover { background: rgba(233,30,140,0.06); }
+.button-38aScr { background: #e91e8c !important; }
+.button-38aScr:hover { background: #ff6eb4 !important; }
+.selected-aXhQR6 { background: rgba(233,30,140,0.18) !important; }
+.selected-aXhQR6 .name-uJV0GL { color: #ff6eb4 !important; }
+.numberBadge-37OJ3S { background: #e91e8c; }

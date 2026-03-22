@@ -1,0 +1,38 @@
+/**
+ * @name Ocean Dark
+ * @author you
+ * @description Deep ocean blues with teal highlights.
+ * @version 1.0.0
+ */
+
+:root {
+  --background-primary: #0b0f1a;
+  --background-secondary: #0d1321;
+  --background-secondary-alt: #0a0e1a;
+  --background-tertiary: #080c16;
+  --background-accent: #0e7490;
+  --background-floating: #0d1321;
+  --channeltextarea-background: #0d1321;
+  --text-normal: #cdd6f4;
+  --text-muted: #6b7a99;
+  --text-link: #22d3ee;
+  --interactive-normal: #8899bb;
+  --interactive-hover: #cdd6f4;
+  --interactive-active: #ffffff;
+  --interactive-muted: #3a4a66;
+  --header-primary: #e2e8f0;
+  --header-secondary: #8899bb;
+  --brand-experiment: #0e7490;
+  --brand-experiment-560: #22d3ee;
+  --scrollbar-thin-thumb: #0e7490;
+  --scrollbar-auto-thumb: #0e7490;
+  --focus-primary: #22d3ee;
+}
+
+.sidebar-1tnWFu { background: #090d18; }
+.message-2qnXI6:hover { background: rgba(14,116,144,0.07); }
+.button-38aScr { background: #0e7490 !important; }
+.button-38aScr:hover { background: #22d3ee !important; }
+.selected-aXhQR6 { background: rgba(14,116,144,0.2) !important; }
+.selected-aXhQR6 .name-uJV0GL { color: #22d3ee !important; }
+.numberBadge-37OJ3S { background: #0e7490; }

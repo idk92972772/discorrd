@@ -1,0 +1,38 @@
+/**
+ * @name Void Purple
+ * @author you
+ * @description Near-black with deep violet and electric purple accents.
+ * @version 1.0.0
+ */
+
+:root {
+  --background-primary: #0c0910;
+  --background-secondary: #110d16;
+  --background-secondary-alt: #0e0b13;
+  --background-tertiary: #090710;
+  --background-accent: #7c3aed;
+  --background-floating: #110d16;
+  --channeltextarea-background: #110d16;
+  --text-normal: #e2d9f3;
+  --text-muted: #7a6a99;
+  --text-link: #a78bfa;
+  --interactive-normal: #9d8cc4;
+  --interactive-hover: #e2d9f3;
+  --interactive-active: #ffffff;
+  --interactive-muted: #3d2d5c;
+  --header-primary: #f0ebff;
+  --header-secondary: #9d8cc4;
+  --brand-experiment: #7c3aed;
+  --brand-experiment-560: #a78bfa;
+  --scrollbar-thin-thumb: #7c3aed;
+  --scrollbar-auto-thumb: #7c3aed;
+  --focus-primary: #a78bfa;
+}
+
+.sidebar-1tnWFu { background: #090710; }
+.message-2qnXI6:hover { background: rgba(124,58,237,0.07); }
+.button-38aScr { background: #7c3aed !important; }
+.button-38aScr:hover { background: #a78bfa !important; }
+.selected-aXhQR6 { background: rgba(124,58,237,0.2) !important; }
+.selected-aXhQR6 .name-uJV0GL { color: #a78bfa !important; }
+.numberBadge-37OJ3S { background: #7c3aed; }
